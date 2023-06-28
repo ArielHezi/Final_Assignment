@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Housing Price Predictor</title>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300&display=swap" rel="stylesheet">
+    <style>
+      body {
+        background-image: url('building-sale-background.jpg');
+        background-size: cover;
+        background-position: center;
+        font-family: 'Heebo', sans-serif;
+        color: #333;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .container {
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 40px;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 5px;
+        text-align: center;
+      }
+
+      .container h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+      }
+
+      .container h2 {
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+
+      .container form label {
+        display: block;
+        font-size: 14px;
+        margin-bottom: 8px;
+        text-align: left;
+      }
+
+      .container form input[type="text"],
+      .container form select,
+      .container form textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        font-size: 14px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .container form textarea {
+        resize: vertical;
+        height: 120px;
+      }
+
+      .container form .button-container {
+        margin-top: 20px;
+      }
+
+      .container form .cool-button {
+        background: linear-gradient(to right, #ff416c, #ff4b2b);
+        border-radius: 25px;
+        color: white;
+        font-size: 16px;
+        padding: 10px 20px;
+        border: none;
+        cursor: pointer;
+        margin-bottom: 10px;
+        transition: background-color 0.3s ease;
+      }
+
+      .container form .cool-button:hover {
+        background-color: #ff4b2b;
+      }
+
+      .container h3 {
+        font-size: 16px;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Housing Price Predictor</h1>
+      <h2>Enter the house details:</h2>
+      <form id="house-form" action="/predict" method="post">
+        <label for="city">City:</label>
+        <input type="text" id="city" name="City">
+
+        <label for="type">Type:</label>
+        <input type="text" id="type" name="type">
+
+        <label for="room-number">Number of Rooms:</label>
+        <input type="text" id="room-number" name="room_number">
+
+        <label for="area">Area:</label>
+        <input type="text" id="area" name="Area">
+
+        <label for="street">Street:</label>
+        <input type="text" id="street" name="Street">
+
+        <label for="city-area">City Area:</label>
+        <input type="text" id="city-area" name="city_area">
+
+        <label for="floor">Floor:</label>
+        <input type="text" id="floor" name="floor">
+
+        <label for="total-floors">Total Floors:</label>
+        <input type="text" id="total-floors" name="total_floors">
+
+        <label for="hasElevator">Has Elevator:</label>
+        <input type="text" id="hasElevator" name="hasElevator">
+
+        <label for="hasParking">Has Parking:</label>
+        <input type="text" id="hasParking" name="hasParking">
+
+        <label for="hasBars">Has Bars:</label>
+        <input type="text" id="hasBars" name="hasBars">
+
+        <label for="hasStorage">Has Storage:</label>
+        <input type="text" id="hasStorage" name="hasStorage">
+
+        <label for="hasBalcony">Has Balcony:</label>
+        <input type="text" id="hasBalcony" name="hasBalcony">
+
+        <label for="hasMamad">Has Mamad:</label>
+        <input type="text" id="hasMamad" name="hasMamad">
+
+        <label for="entrance-date">Entrance Date:</label>
+        <select id="entrance-date" name="entranceDate" onchange="handleDateSelection(this)">
+          <option value="">לא צויין</option>
+          <option value="מיידי">מיידי</option>
+          <option value="בחר תאריך">בחר תאריך</option>
+        </select>
+
+        <input type="datetime-local" id="datepicker" name="entranceDate" style="display: none;">
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea>
+
+        <div class="button-container">
+          <button type="submit" class="cool-button">Predict Price</button>
+        </div>
+      </form>
+      <h3>{{ prediction_text }}</h3>
+    </div>
+
+    <script>
+      function handleDateSelection(selectElement) {
+        const datepickerInput = document.getElementById("datepicker");
+        if (selectElement.value === "בחר תאריך") {
+          datepickerInput.style.display = "block";
+        } else {
+          datepickerInput.style.display = "none";
+        }
+      }
+    </script>
+  </body>
+</html>
